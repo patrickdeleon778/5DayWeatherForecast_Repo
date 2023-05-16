@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <title>Weather Forecast</title>
+</head>
+
+<body id="pic">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-end pt-2">
+                <h1>5 Day Weather Forecast</h1>
+            </div>
+            <div class="col-6 pt-3">
+                <input class="form-control-sm" type="text" id="search">
+                <button class="btn btn-primary mx-3" id="btn">Search</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center pt-5">
+                <h2 id="place">Stockton,CA</h2>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <h3 id="temp">91</h3>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <h6>Min</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <h6>Max</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <h6 id="temp_min">78</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <h6 id="temp_max">99</h6>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <h6>Feels Like</h6>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <h6 id="feels_like">87</h6>
+            </div>
+            <div class="col-12 d-flex justify-content-center pt-5">
+                <h2>Wind</h2>
+            </div>
+
+            <div class="col-6 d-flex justify-content-end">
+                <h6>Speed</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <h6>Degrees</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <h6 id="speed">10</h6>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <h6 id="deg">300</h6>
+            </div>
+            <div class="col-12 d-flex justify-content-center pt-4">
+                <button class="btn btn-primary" id="favBtn">Add to Favorites</button>
+            </div>
+            <div class="col-12 d-flex justify-content-center pt-4">
+                <button class="btn btn-danger" id="delBtn">Delete Favorites</button>
+            </div>
+            
+            <div id="forecastContainer"></div>
+            <div id="inject"></div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="/Scripts/scripts.js"></script>
+</body>
+
+</html>
