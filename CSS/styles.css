@@ -1,0 +1,18 @@
+.background {
+    background-image: url('/Images/16-bit-1920-x-1080-uiflyo8fkatxjwxu.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+@font-face {
+    font-family: "Pixel";
+    src: url(/Font/PixeloidMono-d94EV.ttf);
+}
+
+.pixelFont {
+    font-family: "Pixel";
+}
+
+.backgroundWhite{
+    background-color: white;
+}
