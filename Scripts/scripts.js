@@ -22,7 +22,7 @@ let weatherArr = [];
 let searchedCity = "";
 
 let favData = JSON.parse(localStorage.getItem("favWeather"));
-console.log(favData);
+// console.log(favData);
 // if(favData && favData != null) {
 //   favArr = favData;
 //   for (let i = 0; i < favData.length; i++) {

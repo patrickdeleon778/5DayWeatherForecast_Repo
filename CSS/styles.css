@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: "Pixel";
-    src: url(/Font/PixeloidMono-d94EV.ttf);
+    src: url(/Font/PixeloidSansBold-PKnYd.ttf);
 }
 
 .pixelFont {
@@ -15,4 +15,26 @@
 
 .backgroundWhite{
     background-color: white;
+}
+
+.btn-fixed-size {
+    width: 150px;
+    height: 40px;
+    background-color: #63C1F6;
+    border-radius: 0%;
+    margin: 15px;
+    color: white;
+}
+
+input {
+    background-color: #93D8FF;
+    border-radius: 0%;
+    color: white;
+}
+.searchBtn {
+    width: 100px;
+    height: 40px;
+    background-color: #63C1F6;
+    border-radius: 0%;
+    color: white;
 }
