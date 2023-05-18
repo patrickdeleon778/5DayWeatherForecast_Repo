@@ -7,7 +7,9 @@ let degSymbol = `&deg;F`;
 let temp = document.getElementById("temp");
 let temp_min = document.getElementById("temp_min");
 let temp_max = document.getElementById("temp_max");
-let climate = document.getElementById("climate");
+let speed = document.getElementById("speed");
+let deg = document.getElementById("deg");
+// let climate = document.getElementById("climate");
 let feels_like = document.getElementById("feels_like");
 let place = document.getElementById("place");
 let favBtn = document.getElementById("favBtn");
@@ -23,38 +25,53 @@ let searchedCity = "";
 
 let favData = JSON.parse(localStorage.getItem("favWeather"));
 // console.log(favData);
-// if(favData && favData != null) {
-//   favArr = favData;
-//   for (let i = 0; i < favData.length; i++) {
-//     if (i === 0) {
-//       fetchForecast(favData[i].url);
-//       let colDiv = document.createElement("div");
-//       colDiv.classList = "col";
+if(favData && favData != null) {
+  favArr = favData;
+  for (let i = 0; i < favData.length; i++) {
+    if (i === 0) {
+      fetchForecast(favData[i].url);
+      // let colDiv = document.createElement("div");
+      // colDiv.classList = "col";
+      // colDiv.setAttribute = "id"
 
-//       let pTag = document.createElement("p");
-//       pTag.innerText = favData[i].name;
-//       pTag.addEventListener("click", (e) => {
-//         fetchForecast(favData[i].url);
-//       });
+      let pTag = document.createElement("li");
+      pTag.innerText = favData[i].name;
+      pTag.addEventListener("click", (e) => {
+        fetchForecast(`${url_pt1}${favData[i].name}${apikey}${units}`)
+          .then((response) => response.json())
+          .then((data) => {
+          getForecast(data);
+        })
+      });
 
-//       colDiv.appendChild(pTag);
-//       inject2.appendChild(colDiv);
+      // colDiv.appendChild(pTag);
+      inject2.appendChild(pTag);
+      inject2.style.maxHeight = '130px';
+      inject2.style.overflowY = 'auto';
+      inject2.style.listStyle = 'none'; // Remove the list style
       
-//     } else {
-//       let colDiv = document.createElement("div");
-//       colDiv.classList = "col";
+    } else {
+      // let colDiv = document.createElement("div");
+      // colDiv.classList = "col";
 
-//       let pTag = document.createElement("p");
-//       pTag.innerText = favData[i].name;
-//       pTag.addEventListener("click", (e) => {
-//         fetchForecast(favData[i].url);
-//       });
+      let pTag = document.createElement("li");
+      pTag.innerText = favData[i].name;
+      pTag.addEventListener("click", (e) => {
+        fetchForecast(`${url_pt1}${favData[i].name}${apikey}${units}`)
+          .then((response) => response.json())
+          .then((data) => {
+          getForecast(data);
+        })
+      });
 
-//       colDiv.appendChild(pTag);
-//       inject2.appendChild(colDiv);
-//     }
-//   }
-// }
+      // colDiv.appendChild(pTag);
+      inject2.appendChild(pTag);
+      inject2.style.maxHeight = '130px';
+      inject2.style.overflowY = 'auto';
+      inject2.style.listStyle = 'none';
+    }
+  }
+}
 
 btn.addEventListener("click", () => {
   fetchForecast(`${url_pt1}${search.value}${apikey}${units}`);
@@ -69,7 +86,7 @@ search.addEventListener("keypress", (e) => {
 favBtn.addEventListener("click", (e) => {
   let obj = {
     name: weatherArr[weatherArr.length - 1].city.name,
-    weatherData: weatherArr[weatherArr.length - 1]
+    // weatherData: weatherArr[weatherArr.length - 1]
     // url: `${url_pt1}${searchedCity}${apikey}${units}`,
   };
   addFavoriteCity(obj);
@@ -95,18 +112,10 @@ delBtn.addEventListener("click", (e) => {
   for(let i = 0; i < currentFav.length; i++){
     if(currentFav[i].innerText === currentCity){
       inject2.removeChild(currentFav[i]);
+      favArr.splice(i, 1);
       break;
     }
   }
-
-
-  // for (let i = 0; i < favArr.length; i++) {
-  //   if (place.innerText.toLowerCase() === favArr[i].name.toLowerCase()) {
-  //     favArr.splice(i, 1);
-  //     let colDiv = inject2.querySelector(".col");
-  //     inject2.removeChild(colDiv);
-  //   }
-  // }
   localStorage.setItem("favWeather", JSON.stringify(favArr));
 });
 
@@ -131,7 +140,10 @@ function getForecast(forecastData) {
     temp.innerText = parseInt(forecastData.list[0].main.temp);
     temp_min.innerText = parseInt(forecastData.list[0].main.temp_min); // grabs the min temp and displays it
     temp_max.innerText = parseInt(forecastData.list[0].main.temp_max); // grabs the max temp and displays it
-    // climate.innerText = parseInt(forecastData.list[0].weather.description);
+    speed.innerText = parseInt(forecastData.list[0].wind.speed);
+    deg.innerText = parseInt(forecastData.list[0].wind.deg);
+
+    // climate.innerText = forecastData.list[0].weather[0].description;
   
     inject.innerHTML = ""; // Makes it so whenever you search for a different city it'll wipe the old search and shows the new one
   
@@ -205,42 +217,21 @@ function addFavoriteCity(city){ // brought to you by zac. Thank you zac!
   let newFav = document.createElement('li');
   newFav.className = 'list-group-item';
   newFav.innerText = city.name;
-  newFav.weatherData = city.weatherData;
+  // newFav.weatherData = city.weatherData;
 
   inject2.appendChild(newFav);
 
-  // if(favData && favData != null) {
-  //   favArr = favData;
-  //   for (let i = 0; i < favData.length; i++) {
-  //     if (i === 0) {
-  //       fetchForecast(favData[i].url);
-  //       let newFav = document.createElement('li');
-  //       newFav.className = 'list-group-item';
   
-  //       newFav.innerText = favData[i].name;
-  //       newFav.addEventListener('click', e => {
-  //         fetchForecast(favData[i].url);
-  //       });
-
-  //       inject2.appendChild(newFav);
-        
-  //     } else {
-  //       let newFav = document.createElement('li');
-  //       newFav.className = 'list-group-item';
-  
-  //       newFav.innerText = favData[i].name;
-  //       newFav.addEventListener('click', e => {
-  //         fetchForecast(favData[i].url);
-  //       });
-
-  //       inject2.appendChild(newFav);
-  //     }
-  //   }
-  // }
+  inject2.style.maxHeight = '130px';
+  inject2.style.overflowY = 'auto';
 
   newFav.addEventListener('click', e => {
-    getForecast(newFav.weatherData);
+    fetchForecast(`${url_pt1}${newFav.innerText}${apikey}${units}`)
+    .then((response) => response.json())
+      .then((data) => getForecast(data));
+    // getForecast(newFav.weatherData);
   })
 }
+
 
 fetchForecast(`${url_pt1}${city}${apikey}${units}`);
