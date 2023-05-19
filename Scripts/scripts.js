@@ -49,6 +49,7 @@ if(favData && favData != null) {
       inject2.style.maxHeight = '130px';
       inject2.style.overflowY = 'auto';
       inject2.style.listStyle = 'none'; // Remove the list style
+      inject2.style.scrollbarColor = "#63C1F6 #93D8FF";
       
     } else {
       // let colDiv = document.createElement("div");
@@ -69,6 +70,7 @@ if(favData && favData != null) {
       inject2.style.maxHeight = '130px';
       inject2.style.overflowY = 'auto';
       inject2.style.listStyle = 'none';
+      inject2.style.scrollbarColor = "#63C1F6 #93D8FF";
     }
   }
 }
@@ -138,6 +140,7 @@ function getForecast(forecastData) {
     console.log(forecastData);
     place.innerText = forecastData.city.name; // changes the place id to the city name
     temp.innerText = parseInt(forecastData.list[0].main.temp);
+    // `${parseInt(forecast.main.temp)}${degSymbol}`
     temp_min.innerText = parseInt(forecastData.list[0].main.temp_min); // grabs the min temp and displays it
     temp_max.innerText = parseInt(forecastData.list[0].main.temp_max); // grabs the max temp and displays it
     speed.innerText = parseInt(forecastData.list[0].wind.speed);
@@ -188,21 +191,29 @@ function getForecast(forecastData) {
       forecastItem.appendChild(temperature);
 
       let minTemp = document.createElement("p");
-      minTemp.classList.add("min-temp");
+      minTemp.classList.add("minTemp");
 
       minTemp.innerText = `Min: ${parseInt(forecast.main.temp_min)}`;
       forecastItem.appendChild(minTemp);
 
       let maxTemp = document.createElement("p");
-      maxTemp.classList.add("max-temp");
+      maxTemp.classList.add("maxTemp");
 
       maxTemp.innerText = `Max: ${parseInt(forecast.main.temp_max)}`;
       forecastItem.appendChild(maxTemp);
   
-      let description = document.createElement("p");
-      description.classList.add("description");
-      description.innerText = forecast.weather[0].description;
-      forecastItem.appendChild(description);
+      // let description = document.createElement("p");
+      // description.classList.add("description");
+      // description.innerText = forecast.weather[0].description;
+      // forecastItem.appendChild(description);
+
+      let weatherIcon = document.createElement('img');
+      weatherIcon.src = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`;
+      weatherIcon.alt = forecast.weather[0].description;
+      weatherIcon.classList.add('weatherIcon');
+      forecastItem.appendChild(weatherIcon);
+
+
       forecastItem.style.marginLeft = "15px";
       forecastItem.style.marginRight = "15px";
       forecastItem.style.paddingTop = "15px";
@@ -224,6 +235,7 @@ function addFavoriteCity(city){ // brought to you by zac. Thank you zac!
   
   inject2.style.maxHeight = '130px';
   inject2.style.overflowY = 'auto';
+  inject2.style.scrollbarColor = "#63C1F6 #93D8FF";
 
   newFav.addEventListener('click', e => {
     fetchForecast(`${url_pt1}${newFav.innerText}${apikey}${units}`)
