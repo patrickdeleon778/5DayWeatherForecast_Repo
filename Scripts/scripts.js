@@ -21,7 +21,7 @@ let btn = document.getElementById("btn");
 
 let favArr = [];
 let weatherArr = [];
-let searchedCity = "";
+// let searchedCity = "";
 
 let favData = JSON.parse(localStorage.getItem("favWeather"));
 // console.log(favData);
@@ -155,6 +155,7 @@ function getForecast(forecastData) {
     for (let i = 0; i < forecastData.list.length; i++) {
       let forecast = forecastData.list[i];
       let forecastDate = new Date(forecast.dt * 1000); // instead of every milisecond it'll be every second
+      forecastDate.setDate(forecastDate.getDate() + 1); // shift the date by one day
       let forecastDay = forecastDate.toLocaleDateString("en-US", { day: "numeric" }); // shows the day only. example: May 15th 2023 = 15
     //   console.log(forecastDay);
   
