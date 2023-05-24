@@ -34,18 +34,18 @@ if(favData && favData != null) {
       // colDiv.classList = "col";
       // colDiv.setAttribute = "id"
 
-      let pTag = document.createElement("li");
-      pTag.innerText = favData[i].name;
-      pTag.addEventListener("click", (e) => {
+      let liTag = document.createElement("li");
+      liTag.innerText = favData[i].name;
+      liTag.addEventListener("click", (e) => {
         fetchForecast(`${url_pt1}${favData[i].name}${apikey}${units}`)
-          .then((response) => response.json())
-          .then((data) => {
-          getForecast(data);
+          .then(response => response.json())
+          .then(data => {
+              getForecast(data);
         })
       });
 
-      // colDiv.appendChild(pTag);
-      inject2.appendChild(pTag);
+      // colDiv.appendChild(liTag);
+      inject2.appendChild(liTag);
       inject2.style.maxHeight = '130px';
       inject2.style.overflowY = 'auto';
       inject2.style.listStyle = 'none'; // Remove the list style
@@ -55,18 +55,18 @@ if(favData && favData != null) {
       // let colDiv = document.createElement("div");
       // colDiv.classList = "col";
 
-      let pTag = document.createElement("li");
-      pTag.innerText = favData[i].name;
-      pTag.addEventListener("click", (e) => {
+      let liTag = document.createElement("li");
+      liTag.innerText = favData[i].name;
+      liTag.addEventListener("click", (e) => {
         fetchForecast(`${url_pt1}${favData[i].name}${apikey}${units}`)
-          .then((response) => response.json())
-          .then((data) => {
-          getForecast(data);
+          .then(response => response.json())
+          .then(data => {
+              getForecast(data);
         })
       });
 
-      // colDiv.appendChild(pTag);
-      inject2.appendChild(pTag);
+      // colDiv.appendChild(liTag);
+      inject2.appendChild(liTag);
       inject2.style.maxHeight = '130px';
       inject2.style.overflowY = 'auto';
       inject2.style.listStyle = 'none';
@@ -95,13 +95,13 @@ favBtn.addEventListener("click", (e) => {
   favArr.push(obj);
   // let colDiv = document.createElement("div");
   // colDiv.classList = "col";
-  // let pTag = document.createElement("p");
-  // pTag.innerText = place.innerText;
-  // pTag.addEventListener("click", (e) => {
+  // let liTag = document.createElement("p");
+  // liTag.innerText = place.innerText;
+  // liTag.addEventListener("click", (e) => {
   //   fetchForecast(obj.url);
   // });
 
-  // colDiv.appendChild(pTag);
+  // colDiv.appendChild(liTag);
   // inject2.appendChild(colDiv);
 
   localStorage.setItem("favWeather", JSON.stringify(favArr));
@@ -124,8 +124,8 @@ delBtn.addEventListener("click", (e) => {
 
 function fetchForecast(url) {
   fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       getForecast(data);
     })
     .catch((error) => {
@@ -209,7 +209,7 @@ function getForecast(forecastData) {
       // forecastItem.appendChild(description);
 
       let weatherIcon = document.createElement('img');
-      weatherIcon.src = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`;
+      weatherIcon.src = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`;
       weatherIcon.alt = forecast.weather[0].description;
       weatherIcon.classList.add('weatherIcon');
       forecastItem.appendChild(weatherIcon);
@@ -240,8 +240,8 @@ function addFavoriteCity(city){ // brought to you by zac. Thank you zac!
 
   newFav.addEventListener('click', e => {
     fetchForecast(`${url_pt1}${newFav.innerText}${apikey}${units}`)
-    .then((response) => response.json())
-      .then((data) => getForecast(data));
+    .then(response => response.json())
+      .then(data => getForecast(data));
     // getForecast(newFav.weatherData);
   })
 }
